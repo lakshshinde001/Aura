@@ -30,6 +30,7 @@ const RouteLayout = () => {
   //  <View style={styles.container}></View>
     <Stack>
       <Stack.Screen name='index' options={{headerShown:false}} />
+      <Stack.Screen name='(auth)' options={{headerShown:false}} />
     </Stack>
   )
 }

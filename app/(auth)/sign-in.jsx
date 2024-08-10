@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import {images} from '../../constants'
 import FormField from '../../components/formField'
 import { formatDiagnostic } from 'typescript'
+import CustomButton from '../../components/customButton'
+import { Link } from 'expo-router'
 
 const SignIn = () => {
 
@@ -12,6 +14,10 @@ const SignIn = () => {
     email : '',
     password : ''
   })
+  const [submitting, setSubmitting] = useState(false);
+  const submit = () => {
+    
+  }
 
   return (
     <SafeAreaView style={styles.safeAreaView} >
@@ -45,7 +51,22 @@ const SignIn = () => {
             otherStyles={{marginTop : 7, }}
             // keyBoardType= 'email-address'  
           />
+          <CustomButton
+              title="Sign in"
+              handlePress={submit}
+              containerStyles={{marginTop: 20}}
+              isLoading={submitting}
+          />
 
+          <View style={styles.dontHaveAccount}>
+            <Text style={styles.dontHaveAccountText}>
+              Don't Have an Account?
+            </Text>
+            <Link href="/sign-up" style={{fontSize : 20, color : '#FFA001', marginTop : 5}} >
+              Sign-up
+            </Link>
+
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -55,6 +76,18 @@ const SignIn = () => {
 export default SignIn
 
 const styles = StyleSheet.create({
+  dontHaveAccountText : {
+    fontSize : 20,
+    color : 'white',
+    marginTop : 5
+
+  },
+  dontHaveAccount : {
+    justifyContent : 'center',
+    paddingTop : 5,
+    flexDirection : 'row',
+    gap : 2
+  },
   safeAreaView: {
     backgroundColor : '#161622',
     height : '100%'
@@ -63,14 +96,15 @@ const styles = StyleSheet.create({
     width : '100%',
     // justifyContent : 'center',
     // alignItems : 'center',
-    padding : 4,
-    marginTop : 16,
+    padding : 30,
+    marginTop : 130,
     marginBottom : 16
   },
   imageStyle : {
     width : 115,
     // height : '100%'
-    height : 35
+    height : 35,
+    marginTop : 20,
   }, 
   textStyle : {
     fontSize : 24,

@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { isWhiteSpaceLike } from 'typescript'
 // import { TextInput } from 'react-native-gesture-handler'
 
 import { icons } from '../constants'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+// import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const FormField = ({title, value, placeholder, handleChangeText, otherStyles, ...props}) => {
 
@@ -23,10 +23,18 @@ const FormField = ({title, value, placeholder, handleChangeText, otherStyles, ..
                 placeholder={placeholder}
                 placeholderTextColor='#7b7b8b'
                 onChangeText={handleChangeText}
-                secureTextEntry={title === 'Password' && !showPassword}
+                secureTextEntry={title === 'Password' && showPassword}
             />
 
-            
+            {title === 'Password' && (
+                <TouchableOpacity onPress={() => setShowPassword(!showPassword)} >
+                    <Image 
+                        source={!showPassword ? icons.eye : icons.eyeHide}
+                        style={styles.imageStyles}
+                        resizeMethod='contain'
+                    />
+                </TouchableOpacity>
+            )}
 
         </View>
     </View>
@@ -37,7 +45,8 @@ export default FormField
 
 const styles = StyleSheet.create({
     textt : {
-        color : 'white'
+        color : 'white',
+        marginTop : 20
     },
     containers : {
         borderWidth : 2,
@@ -47,7 +56,9 @@ const styles = StyleSheet.create({
         paddingHorizontal : 16,
         backgroundColor : '#f5f5f5',
         borderRadius : 16,
-        justifyContent : 'center'
+        justifyContent : 'center',
+        flexDirection : 'row',
+        marginTop : 10
     }, 
     focused : {
         borderColor : "#3b82f6"
@@ -55,5 +66,10 @@ const styles = StyleSheet.create({
     textInputStyle : {
         flex : 1,
         color : 'black'
+    },
+    imageStyles : {
+        height : 24,
+        width : 24,
+        marginTop : 20
     }
 })
