@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {images} from '../constants'
 import CustomButton from '../components/customButton'
+import { useGlobalContext } from '../context/globalProvider'
 
 
 
@@ -14,7 +15,9 @@ const minnHeight = height * 0.85;
 
 const App = () => {
 
+  const {isLoading, isLoggedIn} = useGlobalContext();
   
+  if(!isLoading && isLoggedIn) return <Redirect href="/home" />
 
   return (
     <SafeAreaView style={styles.SafeArea}>
